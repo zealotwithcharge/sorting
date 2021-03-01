@@ -18,7 +18,9 @@ but it even makes sequential search significantly faster due to an optimization 
 
 In the real world, you will never implement your own sorting algorithm,
 and will always use a built-in library routine.
-But it is still important to understand how they work in order to select which algorithm to use.
+The divide-and-conquer strategy used in merge/quick sort turns out to be the most fundamental tool for building your own fast algorithms.
+Next week (after spring break), we will explore this strategy for massively parallel data analysis of multi-terabyte twitter data.
+If you take CS148 (graph algorithms), you will explore many more variations of the divide and conquer technique.
 
 ## Tasks
 
