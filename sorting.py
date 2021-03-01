@@ -3,41 +3,57 @@
 Python provides built-in sort/sorted functions that use timsort internally.
 You cannot use these built-in functions anywhere in this file.
 
-Every function in this file takes a comparator `cmp` as input which controls how the elements of the list should be compared against each other.
-If cmp(a,b) returns -1, then a<b;
-if cmp(a,b) returns  1, then a>b;
-if cmp(a,b) returns  0, then a==b.
+Every function in this file takes a comparator `cmp` as input
+which controls how the elements of the list should be compared against each other:
+If cmp(a, b) returns -1, then a < b;
+if cmp(a, b) returns  1, then a > b;
+if cmp(a, b) returns  0, then a == b.
 '''
 
 import random
 
-def cmp_standard(a,b):
+def cmp_standard(a, b):
     '''
     used for sorting from lowest to highest
+
+    >>> cmp_standard(125, 322)
+    -1
+    >>> cmp_standard(523, 322)
+    1
     '''
-    if a<b:
+    if a < b:
         return -1
-    if b<a:
+    if b < a:
         return 1
     return 0
 
 
-def cmp_reverse(a,b):
+def cmp_reverse(a, b):
     '''
     used for sorting from highest to lowest
+
+    >>> cmp_reverse(125, 322)
+    1
+    >>> cmp_reverse(523, 322)
+    -1
     '''
-    if a<b:
+    if a < b:
         return 1
-    if b<a:
+    if b < a:
         return -1
     return 0
 
 
-def cmp_last_digit(a,b):
+def cmp_last_digit(a, b):
     '''
     used for sorting based on the last digit only
+
+    >>> cmp_last_digit(125, 322)
+    1
+    >>> cmp_last_digit(523, 322)
+    1
     '''
-    return cmp_standard(a%10,b%10)
+    return cmp_standard(a % 10, b % 10)
 
 
 def _merged(xs, ys, cmp=cmp_standard):
@@ -45,6 +61,14 @@ def _merged(xs, ys, cmp=cmp_standard):
     Assumes that both xs and ys are sorted,
     and returns a new list containing the elements of both xs and ys.
     Runs in linear time.
+
+    NOTE:
+    In python, helper functions are frequently prepended with the _.
+    This is a signal to users of a library that these functions are for "internal use only",
+    and not part of the "public interface".
+
+    >>> _merged([1, 3, 5], [2, 4, 6])
+    [1, 2, 3, 4, 5, 6]
     '''
 
 
@@ -61,7 +85,8 @@ def merge_sorted(xs, cmp=cmp_standard):
             sort the right
             merge the two sorted halves
 
-    You should return a sorted version of the input list xs
+    You should return a sorted version of the input list xs.
+    You should not modify the input list xs in any way.
     '''
 
 
@@ -84,16 +109,24 @@ def quick_sorted(xs, cmp=cmp_standard):
             sort both lists recursively
             return the concatenation of (less than, p, and greater than)
 
-    You should return a sorted version of the input list xs
+    You should return a sorted version of the input list xs.
+    You should not modify the input list xs in any way.
     '''
 
 
 def quick_sort(xs, cmp=cmp_standard):
     '''
     EXTRA CREDIT:
-    The main advantage of quick_sort is that it can be implemented in-place,
-    i.e. with O(1) memory requirement.
-    Merge sort, on the other hand, has an O(n) memory requirement.
+    The main advantage of quick_sort is that it can be implemented "in-place".
+    This means that no extra lists are allocated,
+    or that the algorithm uses Theta(1) additional memory.
+    Merge sort, on the other hand, must allocate intermediate lists for the merge step,
+    and has a Theta(n) memory requirement.
+    Even though quick sort and merge sort both have the same Theta(n log n) runtime,
+    this more efficient memory usage typically makes quick sort faster in practice.
+    (We say quick sort has a lower "constant factor" in its runtime.)
+    The downside of implementing quick sort in this way is that it will no longer be a [stable sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability),
+    but this is typically inconsequential.
 
     Follow the pseudocode of the Lomuto partition scheme given on wikipedia
     (https://en.wikipedia.org/wiki/Quicksort#Algorithm)
