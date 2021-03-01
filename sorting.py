@@ -113,8 +113,9 @@ def quick_sorted(xs, cmp=cmp_standard):
             select a pivot value p
             put all the values less than p in a list
             put all the values greater than p in a list
-            sort both lists recursively
-            return the concatenation of (less than, p, and greater than)
+            put all the values equal to p in a list
+            sort the greater/less than lists recursively
+            return the concatenation of (less than, equal, greater than)
 
     You should return a sorted version of the input list xs.
     You should not modify the input list xs in any way.
