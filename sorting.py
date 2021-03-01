@@ -67,6 +67,13 @@ def _merged(xs, ys, cmp=cmp_standard):
     This is a signal to users of a library that these functions are for "internal use only",
     and not part of the "public interface".
 
+    This _merged function could be implemented as a local function within the merge_sorted scope rather than a global function.
+    The downside of this is that the function can then not be tested on its own.
+    Typically, you should only implement a function as a local function if it cannot function on its own
+    (like the go functions from binary search).
+    If it's possible to make a function stand-alone,
+    then you probably should do that and write test cases for the stand-alone function.
+
     >>> _merged([1, 3, 5], [2, 4, 6])
     [1, 2, 3, 4, 5, 6]
     '''
